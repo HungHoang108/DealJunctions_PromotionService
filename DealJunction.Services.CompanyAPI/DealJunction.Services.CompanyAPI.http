@@ -1,0 +1,6 @@
+@DealJunction.Services.CompanyAPI_HostAddress = http://localhost:5136
+
+GET {{DealJunction.Services.CompanyAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

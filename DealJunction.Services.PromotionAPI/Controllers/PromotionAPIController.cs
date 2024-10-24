@@ -48,12 +48,6 @@ namespace DealJunction.Services.PromotionAPI.Controllers
             }
             var promotionEntity = _mapper.Map<Promotion>(promotion);
 
-            var employee = await _context.Employees.FindAsync(promotionEntity.EmployeeId);
-            if (employee == null)
-            {
-                return NotFound($"Employee with Id {promotionEntity.EmployeeId} not found.");
-            }
-
             promotionEntity.CreatedAt = DateTimeOffset.Now;
             promotionEntity.UpdatedAt = DateTimeOffset.Now;
             _context.Promotions.Add(promotionEntity);

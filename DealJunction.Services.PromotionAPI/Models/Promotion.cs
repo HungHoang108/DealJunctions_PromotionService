@@ -8,6 +8,5 @@
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset EndDate { get; set; }
         public string DiscountCode { get; set; } = string.Empty;
-        public Employee? Employee { get; set; }
     }
 }

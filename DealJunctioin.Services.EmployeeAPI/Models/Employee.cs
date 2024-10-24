@@ -1,4 +1,4 @@
-﻿namespace DealJunction.Services.PromotionAPI.Models
+﻿namespace DealJunction.Services.EmployeeAPI.Models
 {
     public class Employee : BaseModel
     {
@@ -8,6 +8,5 @@
         public string PhoneNumber { get; set; } = string.Empty;
         public int CompanyId { get; set; }
         public string Role { get; set; } = string.Empty;
-        public Company? Company { get; set; }
     }
 }
