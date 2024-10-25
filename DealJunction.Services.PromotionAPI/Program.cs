@@ -1,4 +1,6 @@
 using DealJunction.Services.PromotionAPI;
+using DealJunction.Services.PromotionAPI.Messaging;
+using DealJunction.Services.PromotionAPI.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(MappingConfig).Assembly);
+
+var optionBuilder = new DbContextOptionsBuilder<AppDbContext>();
+optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+//builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddSingleton(new EmployeeService(optionBuilder.Options));
+builder.Services.AddHostedService<RabbitMQConsumer>();
 
 builder.Services.AddControllers();
 

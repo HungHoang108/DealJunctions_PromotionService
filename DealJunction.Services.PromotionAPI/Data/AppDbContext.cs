@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 public class AppDbContext : DbContext
 {
     public DbSet<Promotion> Promotions { get; set; }
+    public DbSet<EmployeeEmails> EmployeeEmails { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -57,5 +58,10 @@ public class AppDbContext : DbContext
                 UpdatedAt = DateTimeOffset.Now
             }
         );
+
+        modelBuilder.Entity<EmployeeEmails>(entity =>
+        {
+            entity.HasKey(e => e.Email);
+        });
     }
 }

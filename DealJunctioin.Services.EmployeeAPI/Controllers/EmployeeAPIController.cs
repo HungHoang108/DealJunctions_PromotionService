@@ -81,7 +81,8 @@ namespace DealJunction.Services.EmployeeAPI.Controllers
                 return NotFound();
 
             }
-            _rabbitMQSender.SendMessage(request, "current-employee");
+
+            _rabbitMQSender.SendMessage(employee.Email.ToString(), "current-employee1");
             return Ok("Login successful!");
         }
     }

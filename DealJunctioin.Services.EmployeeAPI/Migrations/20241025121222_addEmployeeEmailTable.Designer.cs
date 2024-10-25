@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DealJunction.Services.EmployeeAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241025121222_addEmployeeEmailTable")]
+    partial class addEmployeeEmailTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,25 +81,25 @@ namespace DealJunction.Services.EmployeeAPI.Migrations
                         {
                             Id = 1,
                             CompanyId = 1,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 10, 25, 15, 57, 14, 764, DateTimeKind.Unspecified).AddTicks(888), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 10, 25, 15, 12, 21, 918, DateTimeKind.Unspecified).AddTicks(7370), new TimeSpan(0, 3, 0, 0, 0)),
                             Email = "john.doe@techcorp.com",
                             FirstName = "John",
                             LastName = "Doe",
                             PhoneNumber = "+1-555-123-4567",
                             Role = "Software Engineer",
-                            UpdatedAt = new DateTimeOffset(new DateTime(2024, 10, 25, 15, 57, 14, 764, DateTimeKind.Unspecified).AddTicks(957), new TimeSpan(0, 3, 0, 0, 0))
+                            UpdatedAt = new DateTimeOffset(new DateTime(2024, 10, 25, 15, 12, 21, 918, DateTimeKind.Unspecified).AddTicks(7563), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 2,
                             CompanyId = 2,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 10, 25, 15, 57, 14, 764, DateTimeKind.Unspecified).AddTicks(963), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 10, 25, 15, 12, 21, 918, DateTimeKind.Unspecified).AddTicks(7568), new TimeSpan(0, 3, 0, 0, 0)),
                             Email = "jane.smith@innovatech.com",
                             FirstName = "Jane",
                             LastName = "Smith",
                             PhoneNumber = "+1-555-987-6543",
                             Role = "Product Manager",
-                            UpdatedAt = new DateTimeOffset(new DateTime(2024, 10, 25, 15, 57, 14, 764, DateTimeKind.Unspecified).AddTicks(965), new TimeSpan(0, 3, 0, 0, 0))
+                            UpdatedAt = new DateTimeOffset(new DateTime(2024, 10, 25, 15, 12, 21, 918, DateTimeKind.Unspecified).AddTicks(7570), new TimeSpan(0, 3, 0, 0, 0))
                         });
                 });
 #pragma warning restore 612, 618
