@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DealJunction.Services.EmployeeAPI.Models;
 using DealJunction.Services.EmployeeAPI.Models.EmployeeDto;
+using DealJunction.Services.EmployeeAPI.RabbitMQSender;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,17 +13,13 @@ namespace DealJunction.Services.EmployeeAPI.Controllers
     {
         private readonly AppDbContext _context;
         private IMapper _mapper;
+        private readonly IRabbitMQMessageSender _rabbitMQSender;
 
-        public EmployeeAPIController(AppDbContext context, IMapper mapper)
+        public EmployeeAPIController(AppDbContext context, IMapper mapper, IRabbitMQMessageSender rabbitMQMessageSender)
         {
             _context = context;
             _mapper = mapper;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetAll()
-        {
-            return await _context.Employees.ToListAsync();
+            _rabbitMQSender = rabbitMQMessageSender;
         }
 
         [HttpGet("{id}")]
@@ -74,19 +71,18 @@ namespace DealJunction.Services.EmployeeAPI.Controllers
             return Ok(existingEmployee);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployee(int id)
+        [HttpPost("/Login")]
+        public async Task<IActionResult> Login([FromBody] EmployeeLoginRequest request)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employees.FirstOrDefaultAsync(p => p.Email == request.Email);
+
             if (employee == null)
             {
-                return NotFound($"Employee with Id {id} not found.");
+                return NotFound();
+
             }
-
-            _context.Employees.Remove(employee);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            _rabbitMQSender.SendMessage(request, "current-employee");
+            return Ok("Login successful!");
         }
     }
 }

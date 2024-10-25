@@ -1,4 +1,5 @@
 using DealJunction.Services.EmployeeAPI;
+using DealJunction.Services.EmployeeAPI.RabbitMQSender;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddAutoMapper(typeof(MappingConfig).Assembly);
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
